@@ -7,7 +7,7 @@ set -o pipefail
 # Can retrieve cloudflare Domain id and list zone's, because, lazy
 
 # Place at:
-# curl https://raw.githubusercontent.com/aipeach/cloudflare-api-v4-ddns/dev/cf-v4-ddns.sh > /usr/local/bin/cf-ddns.sh && chmod +x /usr/local/bin/cf-ddns.sh
+# curl https://raw.githubusercontent.com/yulewang/cloudflare-api-v4-ddns/master/cf-v4-ddns.sh > /usr/local/bin/cf-ddns.sh && chmod +x /usr/local/bin/cf-ddns.sh
 # run `crontab -e` and add next line:
 # */1 * * * * /usr/local/bin/cf-ddns.sh >/dev/null 2>&1
 # or you need log:
@@ -16,6 +16,7 @@ set -o pipefail
 
 # Usage:
 # cf-ddns.sh -k cloudflare-api-key \
+#            -u user@example.com \
 #            -h host.example.com \     # fqdn of the record you want to update
 #            -z example.com \          # will show you all zones if forgot, but you need this
 #            -t A|AAAA                 # specify ipv4/ipv6, default: ipv4
@@ -25,7 +26,7 @@ set -o pipefail
 
 # default config
 
-# API key, see https://dash.cloudflare.com/profile/api-tokens,
+# API key, see https://www.cloudflare.com/a/account/my-account,
 # incorrect api-key results in E_UNAUTH error
 CFKEY=
 
@@ -36,10 +37,10 @@ CFZONE_NAME=
 CFRECORD_NAME=
 
 # Record type, A(IPv4)|AAAA(IPv6), default IPv4
-CFRECORD_TYPE=A
+CFRECORD_TYPE=
 
 # Cloudflare TTL for record, between 120 and 86400 seconds
-CFTTL=60
+CFTTL=
 
 # Ignore local file, update ip anyway
 FORCE=false
